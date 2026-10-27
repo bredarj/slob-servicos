@@ -39,8 +39,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Calendar as CalendarIcon, FileDown, Loader2, User, Activity } from 'lucide-react';
+import { Calendar as CalendarIcon, FileDown, Loader2, User, Activity, ArrowUpRight } from 'lucide-react';
 import { useFirebase, useCollection, useMemoFirebase } from '@/firebase';
 import {
   collection,
@@ -95,6 +97,7 @@ const WhatsappIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 
 export function ReportsTab() {
+  const router = useRouter();
   const { firestore, user } = useFirebase();
   const [date, setDate] = useState<DateRange | undefined>({
     from: addDays(new Date(), -30),
@@ -519,38 +522,52 @@ export function ReportsTab() {
                   <TableHead className="text-right">Rec. Bruta</TableHead>
                   <TableHead className="text-right text-green-600 dark:text-green-400">G. Real</TableHead>
                   <TableHead className="text-right text-orange-600 dark:text-orange-400">Material</TableHead>
+                  <TableHead className="w-[80px] text-center">Ação</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredData.length > 0 ? (
                   filteredData.map((budget) => (
-                    <TableRow key={budget.id}>
-                      <TableCell className="font-medium">
-                        {budget.clientName}
+                    <TableRow
+                      key={budget.id}
+                      onClick={() => router.push(`/orcamentos/${budget.id}`)}
+                      className="cursor-pointer hover:bg-muted/70 transition-colors group"
+                      title="Clique para ver os detalhes do orçamento"
+                    >
+                      <TableCell className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {budget.clientName || 'Cliente não informado'}
                       </TableCell>
-                      <TableCell>{budget.task}</TableCell>
+                      <TableCell className="text-muted-foreground">{budget.task || '-'}</TableCell>
                       <TableCell className="text-center">
                         <Badge
                           variant="outline"
-                          className={`capitalize ${statusStyles[budget.status]}`}
+                          className={`capitalize ${statusStyles[budget.status] || ''}`}
                         >
                           {budget.status}
                         </Badge>
                       </TableCell>
-                      <TableCell className="text-right">
+                      <TableCell className="text-right font-medium">
                         {formatCurrency(budget.total)}
                       </TableCell>
-                      <TableCell className="text-right text-green-600 dark:text-green-400">
+                      <TableCell className="text-right font-medium text-green-600 dark:text-green-400">
                         {formatCurrency(budget.profit || 0)}
                       </TableCell>
-                      <TableCell className="text-right text-orange-600 dark:text-orange-400">
+                      <TableCell className="text-right font-medium text-orange-600 dark:text-orange-400">
                         {formatCurrency(budget.materialCost || 0)}
+                      </TableCell>
+                      <TableCell className="text-center" onClick={(e) => e.stopPropagation()}>
+                        <Button size="sm" variant="ghost" className="h-8 px-2" asChild>
+                          <Link href={`/orcamentos/${budget.id}`} title="Ver detalhes do orçamento">
+                            <span className="text-xs mr-1">Ver</span>
+                            <ArrowUpRight className="h-3.5 w-3.5" />
+                          </Link>
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))
                 ) : (
                   <TableRow>
-                    <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                    <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
                       Nenhum orçamento encontrado com os filtros aplicados.
                     </TableCell>
                   </TableRow>
