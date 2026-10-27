@@ -152,13 +152,20 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
             <Card className="col-span-4 lg:col-span-3">
-              <CardHeader>
-                <CardTitle>Orçamentos Recentes</CardTitle>
-                <CardDescription>
-                  {`Você tem ${
-                    filteredBudgets?.length || 0
-                  } orçamentos registrados no total.`}
-                </CardDescription>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+                <div className="space-y-1">
+                  <CardTitle>Orçamentos Recentes</CardTitle>
+                  <CardDescription>
+                    {`Você tem ${
+                      filteredBudgets?.length || 0
+                    } orçamentos registrados no total.`}
+                  </CardDescription>
+                </div>
+                <Button variant="ghost" size="sm" asChild className="text-xs h-8 px-2.5">
+                  <Link href="/orcamentos">
+                    Ver todos
+                  </Link>
+                </Button>
               </CardHeader>
               <CardContent>
                 <RecentBudgets budgets={filteredBudgets} />
