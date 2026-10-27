@@ -16,8 +16,12 @@
 ## 3. Atalho Windows
 - Criado atalho na Área de Trabalho com suporte a modo App: `SLOB_SERVIÇOS.lnk`.
 
-## 4. Nova Funcionalidade
+## 4. Novas Funcionalidades Recentes
 - Implementada caixa de diálogo com a pergunta *"Deseja realmente duplicar este orçamento?"* antes de clonar qualquer orçamento na lista e na página de detalhes.
+- **Orçamentos Recentes Clicáveis:** No painel principal (dashboard), os itens de "Orçamentos Recentes" agora são interativos/clicáveis e abrem diretamente a visualização do orçamento (`/orcamentos/[id]`). Também foi adicionado botão *"Ver todos"* no cabeçalho do card.
 
-## 5. Próximos Deploys
-- A Vercel CLI está autenticada localmente. Qualquer nova modificação será publicada diretamente com `npx vercel --prod --yes`.
+## 5. Deploys Realizados
+- **Último Deploy em Produção:** `dpl_37TMjdnTvhMYMhXAz31CcpgrJuWK` (27/10/2026)
+- **Status:** ✅ Sucesso
+- **URL Produção:** [https://slob-servicos.vercel.app](https://slob-servicos.vercel.app)
+
