@@ -20,8 +20,12 @@
 - Implementada caixa de diálogo com a pergunta *"Deseja realmente duplicar este orçamento?"* antes de clonar qualquer orçamento na lista e na página de detalhes.
 - **Orçamentos Recentes Clicáveis:** No painel principal (dashboard), os itens de "Orçamentos Recentes" agora são interativos/clicáveis e abrem diretamente a visualização do orçamento (`/orcamentos/[id]`). Também foi adicionado botão *"Ver todos"* no cabeçalho do card.
 
+- **Orçamentos Clicáveis em Relatórios:** Na aba Relatórios do dashboard, cada linha da tabela agora é clicável e navega diretamente para os detalhes do orçamento (`/orcamentos/[id]`), além de contar com uma nova coluna de ação contendo o botão *"Ver"*.
+
 ## 5. Deploys Realizados
-- **Último Deploy em Produção:** `dpl_37TMjdnTvhMYMhXAz31CcpgrJuWK` (27/10/2026)
+- **Último Deploy em Produção:** `dpl_GfN7ThzYVAj22EgYnQP3MGgXvwo1` (27/10/2026 - Relatórios Clicáveis)
+- **Deploy Anterior:** `dpl_37TMjdnTvhMYMhXAz31CcpgrJuWK` (27/10/2026 - Orçamentos Recentes Clicáveis)
 - **Status:** ✅ Sucesso
 - **URL Produção:** [https://slob-servicos.vercel.app](https://slob-servicos.vercel.app)
+
 

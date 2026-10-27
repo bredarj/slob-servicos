@@ -23,4 +23,11 @@ Arquivo destinado a registrar alinhamentos, solicitações e o histórico de alt
   - Adicionado efeito de hover suave (`hover:bg-muted/70`), transição de cor no nome do cliente, badge com o status do orçamento e ícone de seta (`ChevronRight`).
   - Cabeçalho do Card em [page.tsx](file:///C:/Users/sergi/.gemini/antigravity-ide/scratch/slob-servicos/src/app/page.tsx): Adicionado botão *"Ver todos"* com link direto para a listagem completa `/orcamentos`.
   - **Validação:** Build do Next.js executado com sucesso (sem erros).
-
+#### 2. Orçamentos Clicáveis na Aba de Relatórios
+- **Solicitação do Usuário:** *"faça o mesmo em reletorios. torne os orçamentos clicavel para ver detalhes"*
+- **Implementação Realizada:**
+  - Componente [reports-tab.tsx](file:///C:/Users/sergi/.gemini/antigravity-ide/scratch/slob-servicos/src/components/app/dashboard/reports-tab.tsx):
+    - Tornou cada linha da tabela de relatórios clicável (`onClick={() => router.push('/orcamentos/${budget.id}')}`) com efeito visual de hover (`hover:bg-muted/70`, cursor pointer e destaque do nome do cliente).
+    - Adicionou uma nova coluna de **Ação** com botão dedicado *"Ver"* (`<Link href={'/orcamentos/${budget.id}'}>`) e ícone `ArrowUpRight` para acesso direto.
+    - Ajustou o `colSpan` para 7 colunas no estado vazio.
+  - **Validação & Deploy:** Build Next.js compilado com sucesso e publicação realizada em produção na Vercel.
