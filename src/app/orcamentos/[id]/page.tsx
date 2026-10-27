@@ -134,6 +134,7 @@ export default function BudgetDetailsPage() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [paymentToDelete, setPaymentToDelete] = useState<Payment | null>(null);
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
+  const [isDuplicateDialogOpen, setIsDuplicateDialogOpen] = useState(false);
   const [companyProfile, setCompanyProfile] = useState<CompanyProfile | null>(null);
 
   const budgetDocRef = useMemoFirebase(
@@ -247,6 +248,8 @@ export default function BudgetDetailsPage() {
         title: 'Erro ao Duplicar',
         description: 'Não foi possível duplicar o orçamento.',
       });
+    } finally {
+      setIsDuplicateDialogOpen(false);
     }
   };
 
@@ -457,7 +460,7 @@ export default function BudgetDetailsPage() {
               <CardDescription>ID do Orçamento: {budget.id}</CardDescription>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" onClick={handleDuplicate}>
+              <Button variant="outline" size="sm" onClick={() => setIsDuplicateDialogOpen(true)}>
                   <Copy className="mr-2 h-4 w-4" />
                   Duplicar
               </Button>
@@ -794,6 +797,21 @@ export default function BudgetDetailsPage() {
             <AlertDialogAction onClick={confirmDeletePayment}>
               Excluir
             </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <AlertDialog open={isDuplicateDialogOpen} onOpenChange={setIsDuplicateDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Duplicar Orçamento</AlertDialogTitle>
+            <AlertDialogDescription>
+              Deseja realmente duplicar este orçamento?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDuplicate}>Duplicar</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

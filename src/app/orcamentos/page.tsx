@@ -109,6 +109,8 @@ function OrcamentosPageComponent() {
   
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [selectedBudgetId, setSelectedBudgetId] = useState<string | null>(null);
+  const [isDuplicateDialogOpen, setIsDuplicateDialogOpen] = useState(false);
+  const [selectedBudgetToDuplicate, setSelectedBudgetToDuplicate] = useState<Budget | null>(null);
   const [clientFilter, setClientFilter] = useState<string | null>(null);
   const [taskFilter, setTaskFilter] = useState<string>('');
   const [observationFilter, setObservationFilter] = useState<string>('');
@@ -205,10 +207,15 @@ function OrcamentosPageComponent() {
     return 'Tarefa não informada';
   }
   
-  const handleDuplicateClick = async (budget: Budget) => {
-    if (!user || !firestore) return;
+  const handleDuplicateClick = (budget: Budget) => {
+    setSelectedBudgetToDuplicate(budget);
+    setIsDuplicateDialogOpen(true);
+  };
+
+  const confirmDuplicate = async () => {
+    if (!selectedBudgetToDuplicate || !user || !firestore) return;
     try {
-      await duplicateBudget(firestore, user.uid, budget);
+      await duplicateBudget(firestore, user.uid, selectedBudgetToDuplicate);
       toast({
         title: 'Orçamento Duplicado!',
         description: `Uma nova cópia em prospecção foi criada.`,
@@ -220,6 +227,9 @@ function OrcamentosPageComponent() {
         title: 'Erro ao Duplicar',
         description: 'Não foi possível duplicar o orçamento.',
       });
+    } finally {
+      setIsDuplicateDialogOpen(false);
+      setSelectedBudgetToDuplicate(null);
     }
   };
 
@@ -457,6 +467,20 @@ function OrcamentosPageComponent() {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
             <AlertDialogAction onClick={confirmDelete}>Deletar</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      <AlertDialog open={isDuplicateDialogOpen} onOpenChange={setIsDuplicateDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Duplicar Orçamento</AlertDialogTitle>
+            <AlertDialogDescription>
+              Deseja realmente duplicar este orçamento?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setSelectedBudgetToDuplicate(null)}>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmDuplicate}>Duplicar</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
