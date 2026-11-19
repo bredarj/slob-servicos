@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, Fragment } from 'react';
 import { DateRange } from 'react-day-picker';
 import { addDays, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -868,7 +868,7 @@ export function ReportsTab() {
                       const isExpanded = !!expandedBudgets[budget.id];
 
                       return (
-                        <div key={budget.id} className="contents">
+                        <Fragment key={budget.id}>
                           <TableRow
                             onClick={() => toggleExpand(budget.id)}
                             className="cursor-pointer hover:bg-muted/70 transition-colors"
@@ -990,7 +990,7 @@ export function ReportsTab() {
                               </TableCell>
                             </TableRow>
                           )}
-                        </div>
+                        </Fragment>
                       );
                     })
                   ) : (
