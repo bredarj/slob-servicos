@@ -27,7 +27,8 @@
 - **Orçamentos Clicáveis em Relatórios:** Na aba Relatórios do dashboard, cada linha da tabela agora é clicável e navega diretamente para os detalhes do orçamento (`/orcamentos/[id]`), além de contar com uma nova coluna de ação contendo o botão *"Ver"*.
 
 ## 5. Deploys Realizados
-- **Último Deploy em Produção:** `dpl_GfN7ThzYVAj22EgYnQP3MGgXvwo1` (27/10/2026 - Relatórios Clicáveis)
+- **Último Deploy em Produção:** `dpl_Cc7ELQEPDFr62euNnHuG6u4U529J` (18/11/2026 - Relatório de Serviços e Pagamentos Parciais)
+- **Deploy Anterior:** `dpl_GfN7ThzYVAj22EgYnQP3MGgXvwo1` (27/10/2026 - Relatórios Clicáveis)
 - **Deploy Anterior:** `dpl_37TMjdnTvhMYMhXAz31CcpgrJuWK` (27/10/2026 - Orçamentos Recentes Clicáveis)
 - **Status:** ✅ Sucesso
 - **URL Produção:** [https://slob-servicos.vercel.app](https://slob-servicos.vercel.app)
